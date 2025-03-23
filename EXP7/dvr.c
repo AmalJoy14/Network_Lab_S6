@@ -33,7 +33,7 @@ void main() {
                 for (k = 0; k < nodes; k++) {
                     if (rt[i].dist[j] > costmat[i][k] + rt[k].dist[j]) {
                         // Update the minimum distance if a shorter path is found
-                        rt[i].dist[j] = rt[i].dist[k] + rt[k].dist[j];
+                        rt[i].dist[j] = costmat[i][k] + rt[k].dist[j];
                         rt[i].from[j] = k;  
                         count++;
                     }

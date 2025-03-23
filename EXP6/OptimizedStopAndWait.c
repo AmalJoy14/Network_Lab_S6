@@ -13,7 +13,11 @@ char turn = 's';
 void sender() {
     if (turn != 's') return;
     
-    printf("SENDER: %s packet with seq NO: %d\n", error_ack ? "Sent" : "Retransmitting", p.seq);
+    if (error_ack != 0) {
+        printf("SENDER: Sent packet with seq NO: %d\n", p.seq);
+    } else {
+        printf("SENDER: Retransmitting packet with seq NO: %d\n", p.seq);
+    }
     
     error_frame = rand() % 4;
     if (error_frame == 0) 
@@ -25,7 +29,7 @@ void sender() {
 void receiver() {
     if (turn != 'r') return;
     
-    if (error_frame) {
+    if (error_frame != 0) {
         printf("RECEIVER: Received packet with seq %d\n", p.seq);
         ack = p.seq;
         

@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include <time.h>
+
 bool disconnect = false;
 int ack = -1 ,error_ack = 1 , error_frame = 1;
 char turn = 's';
@@ -15,9 +16,11 @@ struct frame{
 void sender(){
     if(turn != 's') return;
     
-    if(error_ack != 0 && ack == p.seq){
-        printf("SENDER: Received ACK for packet %d\n", ack);
-        p.seq++;
+    if(error_ack != 0 ){
+        if(ack == p.seq){
+            printf("SENDER: Received ACK for packet %d\n", ack);
+            p.seq++;
+        }
         printf("SENDER : Sent packet with seq NO. %d\n" , p.seq);
     }
     else{

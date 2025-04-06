@@ -6,7 +6,7 @@ struct frame {
     int seq;
 } p;
 
-int ack, disconnect = 0;
+int ack = -1, disconnect = 0;
 int error_frame = 1, error_ack = 1;
 char turn = 's';
 
